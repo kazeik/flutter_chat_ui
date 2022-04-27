@@ -173,6 +173,7 @@ class _InputState extends State<Input> {
                                 color: InheritedChatTheme.of(context).theme.inputTextColor.withOpacity(0.5),
                               ),
                           hintText: InheritedL10n.of(context).l10n.inputPlaceholder,
+                          contentPadding: const EdgeInsets.only(left: 5),
                         ),
                     focusNode: _inputFocusNode,
                     keyboardType: TextInputType.multiline,
