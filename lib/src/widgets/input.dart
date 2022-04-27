@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -135,14 +137,14 @@ class _InputState extends State<Input> {
             _query.padding.right,
             _query.viewInsets.bottom + _query.padding.bottom,
           );
-    final _textPadding = InheritedChatTheme.of(context).theme.inputPadding.copyWith(left: 0, right: 0).add(
-          EdgeInsetsDirectional.fromSTEB(
-            widget.onAttachmentPressed != null ? 0 : 24,
-            0,
-            _sendButtonVisible ? 0 : 24,
-            0,
-          ),
-        );
+    // final _textPadding = InheritedChatTheme.of(context).theme.inputPadding.copyWith(left: 0, right: 0).add(
+    //       EdgeInsetsDirectional.fromSTEB(
+    //         widget.onAttachmentPressed != null ? 0 : 24,
+    //         0,
+    //         _sendButtonVisible ? 0 : 24,
+    //         0,
+    //       ),
+    //     );
     return Focus(
       autofocus: true,
       child: Padding(
@@ -173,7 +175,7 @@ class _InputState extends State<Input> {
                                 color: InheritedChatTheme.of(context).theme.inputTextColor.withOpacity(0.5),
                               ),
                           hintText: InheritedL10n.of(context).l10n.inputPlaceholder,
-                          contentPadding: const EdgeInsets.only(left: 5),
+                          contentPadding: const EdgeInsets.only(left: 10),
                         ),
                     focusNode: _inputFocusNode,
                     keyboardType: TextInputType.multiline,
@@ -208,12 +210,9 @@ class _InputState extends State<Input> {
 
   @override
   Widget build(BuildContext context) {
-    final isAndroid = Theme.of(context).platform == TargetPlatform.android;
-    final isIOS = Theme.of(context).platform == TargetPlatform.iOS;
-
     return GestureDetector(
       onTap: () => _inputFocusNode.requestFocus(),
-      child: isAndroid || isIOS
+      child: Platform.isAndroid || Platform.isIOS
           ? _inputBuilder()
           : Shortcuts(
               shortcuts: {
