@@ -210,9 +210,12 @@ class _InputState extends State<Input> {
 
   @override
   Widget build(BuildContext context) {
+    final isAndroid = Theme.of(context).platform == TargetPlatform.android;
+    final isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+
     return GestureDetector(
       onTap: () => _inputFocusNode.requestFocus(),
-      child: Platform.isAndroid || Platform.isIOS
+      child: isAndroid || isIOS
           ? _inputBuilder()
           : Shortcuts(
               shortcuts: {
